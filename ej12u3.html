@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicación</title>
+</head>
+
+<body>
+    <form name="formulario">
+        <input type="text" name="entrada"/>
+
+        <input type="button" type="text" value="añadir" onclick="añadir()" />
+
+        <hr>
+        <input type="button" type="text" value="sumar" onclick="sumar()" />
+
+        <input type="button" type="text" value="multiplicar" onclick="multiplicar()" />
+
+        <input type="button" type="text" value="media" onclick="media()" />
+
+        <input type="button" type="text" value="Listar de mayor a menor" onclick="mayorAmenor()" />
+
+        <input type="button" type="text" value="Listar de menor a mayor" onclick="menorAmayor()" />
+
+        <input type="button" type="text" value="Mostrar número mayor" onclick="mostrarMayor()" />
+
+        <input type="button" type="text" value="Mostrar número menor" onclick="mostrarMenor()" />
+    </form>
+    <h2>Resultado:</h2>
+    <h1 id="resultado"></h1>
+    
+    <script>
+        const conjunto=[];
+        let oResultado=document.getElementById("resultado");
+       
+
+        let añadir=()=>{
+            let oEntrada=formulario.entrada;
+            let fEntrada=parseFloat(oEntrada.value.replace(",","."));
+            conjunto.push(fEntrada);
+            oEntrada.value="";
+            console.log(conjunto);
+        }
+
+        let sumar=()=>{
+            let iSuma=0;
+            conjunto.forEach(x=>iSuma+=x);
+            oResultado.innerHTML=iSuma;
+        }
+
+        let multiplicar=()=>{
+            let iProducto=1;
+            conjunto.forEach(x=>iProducto*=x);
+            oResultado.innerHTML=iProducto;
+        }
+
+        let media=()=>{
+            let iSuma=0;
+            conjunto.forEach(x=>iSuma+=x);
+            oResultado.innerHTML=(iSuma/conjunto.length);
+        }
+
+        let mayorAmenor=()=> oResultado.innerHTML=conjunto.sort((a,b)=>b-a);
+        
+        let menorAmayor=()=> oResultado.innerHTML=conjunto.sort((a,b)=>a-b);
+        
+        let mostrarMayor=()=>{
+            let iMayor=conjunto[0];
+            conjunto.forEach(value=>iMayor=(iMayor<value)?value:iMayor);
+            oResultado.innerHTML=iMayor;
+        }
+
+        let mostrarMenor=()=>{
+            let iMenor=conjunto[0];
+            conjunto.forEach(value=>iMenor=(iMenor>value)?value:iMenor);
+            oResultado.innerHTML=iMenor;
+        }
+
+    </script>
+</body>
+
+</html>

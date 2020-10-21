@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <form name="formulario">
+            <div class="form-group row">
+                <label for="txtFecha" class="col-4 col-form-label">Generar calendario de:</label>
+                <div class="col-8">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-address-card"></i>
+                            </div>
+                        </div>
+                        <input id="txtFecha" name="txtFecha" type="date" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-4 col-8">
+                    <input  value="enviar"type="button" class="btn btn-primary" onclick="generarTabla()">
+                </div>
+            </div>
+        </form>
+        <div id="calendario"></div>
+    </div>
+    <script>
+        
+        function generarTabla(){
+            let oFecha=new Date(formulario.txtFecha.value); 
+            document.getElementById("calendario").innerHTML=getHTMLTableMounth(oFecha);
+
+        }
+
+        function getHTMLTableMounth(dtFecha){
+            let sHtmlTable="<table border='1'><tr><th>L</th><th>M</th><th>M</th>";
+                sHtmlTable+="<th>J</th><th>V</th><th>S</th><th>D</th></tr>";
+            let sHtmlFila="";
+
+            dtFecha.setDate(1);
+            let iDiasAumentados=1;
+
+            for(let i=0;i<6;i++){
+                sHtmlFila=`${getHTMLRowCalendarWeek(dtFecha)}`;
+                
+
+                sHtmlTable+=sHtmlFila;
+                iDiasAumentados+=7;
+                dtFecha.setDate(iDiasAumentados);
+            }
+            sHtmlTable+="</table>";
+
+            return sHtmlTable; 
+        }
+
+        function getHTMLRowCalendarWeek(dtFech) {
+            let sHtml = "<tr>";
+            
+
+            let dtFecha = getSunday(dtFech);
+            dtFecha=sumarDias(dtFecha,-6);
+            
+
+            for (let i = 0; i < 7; i++) {        
+                
+                sHtml+= `<td>${dtFecha.getDate()}</td>`;
+                
+                dtFecha = sumarDias(dtFecha, 1);
+            }
+
+            sHtml += "</tr>";
+            return sHtml;
+        }
+
+                
+
+        function sumarDias(dtFech, iDias) {
+            let iDiasAms = iDias * 24 * 3600 * 1000;
+
+            let dtResultado = new Date(dtFech.getTime() + iDiasAms);
+
+            return dtResultado;
+
+        }
+
+        function getSunday(dtFech) {
+            let nuevaFecha = new Date(dtFech);
+            let iDaysAdd = 1;
+
+
+            while (nuevaFecha.getDay() != 0) {
+
+                nuevaFecha.setDate(nuevaFecha.getDate() + iDaysAdd);
+            }
+
+            return nuevaFecha;
+        }
+
+
+
+    </script>
+</body>
+
+</html>
