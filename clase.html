@@ -37,9 +37,11 @@
     <script>
         
         function generarTabla(){
+            
             let oFecha=new Date(formulario.txtFecha.value); 
-            document.getElementById("calendario").innerHTML=getHTMLTableMounth(oFecha);
-
+            if(formulario.txtFecha.value!=""){
+                document.getElementById("calendario").innerHTML=getHTMLTableMounth(oFecha);
+            }
         }
 
         function getHTMLTableMounth(dtFecha){
@@ -48,10 +50,11 @@
             let sHtmlFila="";
 
             dtFecha.setDate(1);
+            let dtFechaDelMesSeleccionada=new Date(dtFecha.getTime());
             let iDiasAumentados=1;
 
             for(let i=0;i<6;i++){
-                sHtmlFila=`${getHTMLRowCalendarWeek(dtFecha)}`;
+                sHtmlFila=`${getHTMLRowCalendarWeek(dtFecha,dtFechaDelMesSeleccionada)}`;
                 
 
                 sHtmlTable+=sHtmlFila;
@@ -63,7 +66,7 @@
             return sHtmlTable; 
         }
 
-        function getHTMLRowCalendarWeek(dtFech) {
+        function getHTMLRowCalendarWeek(dtFech,dtFechaDelMesSeleccionada) {
             let sHtml = "<tr>";
             
 
@@ -72,13 +75,19 @@
             
 
             for (let i = 0; i < 7; i++) {        
-                
-                sHtml+= `<td>${dtFecha.getDate()}</td>`;
+                if(dtFechaDelMesSeleccionada.getMonth()==dtFecha.getMonth()){
+                    sHtml+= `<td>${dtFecha.getDate()}</td>`;
+                }else{
+                    sHtml+= `<td>-</td>`;
+                }
                 
                 dtFecha = sumarDias(dtFecha, 1);
             }
 
             sHtml += "</tr>";
+            
+            
+            
             return sHtml;
         }
 
