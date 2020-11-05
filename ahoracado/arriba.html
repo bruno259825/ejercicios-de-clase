@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+  "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2 style="text-align: center;">El ahorcado
+        <input type="button" value="Reiniciar" style="position:relative;left:30%;" onclick="reiniciarPartida()">
+    </h2>
+
+    <script>
+        function reiniciarPartida(){
+            window.top.frames["abajo"].frames["izquierda"].location.reload();
+            window.top.frames["abajo"].frames["derecha"].location.reload();
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>

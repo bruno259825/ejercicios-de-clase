@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form name="frm" style="margin-top:45px;">
+        <label>Letra</label>
+        <input type="text" name="txtLetras" id="txtLetras">
+        <input name="boton" type="button" value="Aceptar" onclick="buscarLetra();" />
+        </p>
+
+        <p>Solución:</p>
+
+        <div id="solucion">
+
+        </div>
+
+        <p>Letras usadas:</p>
+        <div id="usadas"></div>
+
+        <p>Fallos:</p>
+        <div id="fallos"></div>
+
+
+        <script type="text/javascript">
+
+            'use strict';
+            let oSolucion = document.getElementById("solucion");
+            let vPalabras = ["Shrek", "cocodrilo", "montadito", "programar", "autobus", "titanic", "tostada",
+                "bocadillo", "gazpacho", "paella", "montadito"];
+            let vLetrasUsadas = [];
+            let oUsadas = document.getElementById("usadas");
+            let oFallos = document.getElementById("fallos");
+
+            let sRespuesta = vPalabras[getRndInteger(0, vPalabras.length)].toLowerCase();
+            let vPalabraCensurada = sRespuesta.trim().split("").fill(" _ ");//getCensurado(sRespuesta);
+            let iFallos = 0;
+            let bGameOver = false;
+
+            function getRndInteger(min, max) {
+                return Math.floor(Math.random() * (max - min)) + min;
+            }
+
+
+
+
+            function buscarLetra() {
+                if (!bGameOver) {
+                    let sLetra = document.frm.txtLetras.value.toLowerCase();
+                    if (sLetra.length != 1) {
+                        alert("Debes introducir solo una letra");
+                    } else if (vLetrasUsadas.includes(sLetra)) {
+                        alert("Esa letra ya se ha usado");
+                    } else {
+                        vLetrasUsadas.push(sLetra);
+                        oUsadas.innerHTML = vLetrasUsadas.join("");
+
+
+                        if (sRespuesta.search(sLetra) != -1) {
+                            let vAux = sRespuesta.split("");
+                            cambiarAguiones(sLetra, vAux);
+                            oSolucion.innerHTML = vPalabraCensurada.join("").trim();
+
+                            if (vPalabraCensurada.some(hayGuion)) {
+                                bGameOver = false;
+                            } else if (iFallos < 10) {
+                                window.top.frames["abajo"].frames["derecha"].imprimirWin();
+                                bGameOver = true;
+                            }
+
+                        } else {
+                            iFallos++;
+                            if (iFallos <= 10) {
+                                oFallos.innerHTML = `<h1>${iFallos}</h1>`;
+                                window.top.frames["abajo"].frames["derecha"].verificarFallos(iFallos);
+                            }
+
+                        }
+
+                    }
+                }
+            }
+
+            function hayGuion(value) {
+                return value == " _ ";
+            }
+
+            function cambiarAguiones(sLet, vAux) {
+                for (let i = 0; i < vAux.length; i++) {
+                    if (sLet == vAux[i]) {
+                        vPalabraCensurada[i] = " " + sLet + " ";
+                    }
+                }
+            }
+
+
+
+            oSolucion.innerHTML = vPalabraCensurada.join("");
+
+
+
+
+
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="" id="imagen">
+    <h1 id="resultado"></h1>
+    <script>
+        let oImagen=document.getElementById("imagen");
+        let sRuta="./img/paso";
+        let oResultado=document.getElementById("resultado");
+
+        function verificarFallos(iNumFallos){
+            oImagen.src=sRuta+iNumFallos+".jpg";
+            if(iNumFallos==10){
+                oResultado.innerHTML="¡PERDISTE!";
+
+                window.top.frames["abajo"].frames["izquierda"].bGameOver=true;
+            }
+        }
+
+        function imprimirWin(){
+            oResultado.innerHTML="¡GANASTE!";
+        }
+    </script>
+    
+</body>
+</html>
