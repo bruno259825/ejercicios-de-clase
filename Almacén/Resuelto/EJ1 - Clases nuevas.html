@@ -1,0 +1,117 @@
+﻿ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>EJ 1 - Clases nuevas</title>
+</head>
+
+<body>
+<script type="text/javascript">
+
+class Empleado {
+    constructor(sNombre, sDepartamento){
+        this._nombre = sNombre;
+        this._departamento = sDepartamento;
+    }
+
+    get nombre(){
+        return this._nombre;
+    }
+
+    set nombre(valor){
+        this._nombre = valor;
+    }
+
+    get departamento(){
+        return this._departamento;
+    }
+
+    set departamento(valor){
+        this._departamento = valor;
+    }
+}
+
+/////////////////////////////////////////////////
+let oE1 = new Empleado("Juan", "Administracion");
+let oE2 = new Empleado("Maria","contabilidad");
+
+// Actualizamos el atributo deirectamente
+oE1._departamento = "otro departamento";
+// Actualizamos el atributo por medio la propiedad set
+oE1.departamento = "este mejor";
+
+console.log("oE1._departamento: " + oE1._departamento);
+console.log("oE1.departamento: " + oE1.departamento);
+////////////////////////////////////////////////
+class Trabajador extends Empleado{
+
+    constructor(sNombre, sDepartamento){
+        // Llamada al constructor de la clase base
+        super(sNombre, sDepartamento);
+
+        this.projects = [];
+    }
+
+    agregarProyecto(sNombreProyecto){
+        this.projects.push(sNombreProyecto);
+    }
+
+    listarProyectos(){
+        return this.projects.toString();
+    }
+}
+///////////////////////////////////////
+let oT1 = new Trabajador("Antonio","Programacion");
+oT1.departamento = "Soporte TIC";
+oT1.agregarProyecto("Seneca");
+oT1.agregarProyecto("Sirhus");
+console.log("listarProyectos:" + oT1.listarProyectos());
+
+//////////////////////////////////////////////////
+
+class Ingeniero extends Trabajador{
+    constructor(sNombre,sEquipoInformatico){
+        //Llamada al constructor de la clase base
+        super(sNombre,"Ingenieria");
+
+        this._equipo = sEquipoInformatico;
+    }
+
+    get equipo(){
+        return this._equipo;
+    }
+
+    set equipo(valor){
+        this._equipo(valor);
+    }
+
+    set departamento(valor){
+        throw "Los ingenieros no pueden cambiar de departamento";
+    }
+
+    get departamento(){
+        return this._departamento;
+    }
+}
+//////////////////////////////
+let oI1 = new Ingeniero("Lola","Equipo7");
+oI1.nombre = "Dolores";
+try{
+    oI1.departamento = "Compras";
+} catch(oError){
+    // En este caso oError es string
+    console.error(oError); 
+}
+
+console.log("oI1._nombre:" + oI1._nombre );
+console.log("oI1.nombre: " + oI1.nombre);
+console.log("oI1.equipo: " + oI1.equipo);
+console.log("oI1.departamento: " + oI1.departamento);
+
+</script>
+
+</body>
+
+</html>

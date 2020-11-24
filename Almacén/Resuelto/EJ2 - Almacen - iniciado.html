@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EJ 2 - Almacén - iniciado</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <style>
+    #menu {
+      width: 25%;
+      float: left;
+    }
+
+    #formularios {
+      width: 72%;
+      float: left;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="menu">
+    <form class="form-horizontal" name="frmMenu">
+      <fieldset>
+
+        <!-- Form Name -->
+        <legend>Menú de opciones</legend>
+
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="btnAltaRemesa"></label>
+          <div class="col-md-4">
+            <input type="button" id="btnAltaRemesa" name="btnAltaRemesa" class="btn btn-primary" value="Alta Remesa"
+              onclick="mostrarAltaRemesa();" />
+          </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="btnBajaRemesa"></label>
+          <div class="col-md-4">
+            <input type="button" id="btnBajaRemesa" name="btnBajaRemesa" class="btn btn-primary" value="Baja remesa"
+              onclick="mostrarBajaRemesa();" />
+          </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="btnListadoBasico"></label>
+          <div class="col-md-4">
+            <input type="button" id="btnListadoBasico" name="btnListadoBasico" onclick="listadoProductos();" class="btn btn-primary"
+              value="Listado básico" />
+          </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="btnProductosPorCodigo"></label>
+          <div class="col-md-4">
+            <input type="button" id="btnProductosPorCodigo" name="btnProductosPorCodigo" class="btn btn-primary"
+              value="Productos por codigo" onclick="productosPorCodigo()" />
+          </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="btnProductosPorValor"></label>
+          <div class="col-md-4">
+            <input type="button" id="btnProductosPorValor" name="btnProductosPorValor" class="btn btn-primary"
+              value="Productos por valor" onclick="productosPorValor()" />
+          </div>
+        </div>
+
+      </fieldset>
+    </form>
+
+  </div>
+
+  <div id="formularios">
+    <form class="form-horizontal" name="frmAltaRemesa">
+      <fieldset>
+
+        <!-- Form Name -->
+        <legend>Alta de remesa</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="txtCodigo">Código de producto</label>
+          <div class="col-md-4">
+            <input id="txtCodigo" name="txtCodigo" type="text" placeholder="" class="form-control input-md">
+
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="txtNombre">Nombre</label>
+          <div class="col-md-4">
+            <input id="txtNombre" name="txtNombre" type="text" placeholder="" class="form-control input-md">
+
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="txtPrecio">Precio</label>
+          <div class="col-md-4">
+            <input id="txtPrecio" name="txtPrecio" type="text" placeholder="" class="form-control input-md">
+
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="txtUnidades">Unidades</label>
+          <div class="col-md-4">
+            <input id="txtUnidades" name="txtUnidades" type="text" placeholder="" class="form-control input-md">
+
+          </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="btnAceptarAltaRemesa"></label>
+          <div class="col-md-4">
+            <input type="button" id="btnAceptarAltaRemesa" name="btnAceptarAltaRemesa" class="btn btn-primary"
+              value="Aceptar" onclick="aceptarAltaRemesa();" />
+          </div>
+        </div>
+
+      </fieldset>
+    </form>
+    <form class="form-horizontal" name="frmBajaRemesa">
+      <fieldset>
+
+        <!-- Form Name -->
+        <legend>Baja de remesa</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="txtCodigo">Código de producto</label>
+          <div class="col-md-4">
+            <input id="txtCodigo" name="txtCodigo" type="text" placeholder="" class="form-control input-md">
+
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="txtUnidades">Unidades</label>
+          <div class="col-md-4">
+            <input id="txtUnidades" name="txtUnidades" type="text" placeholder="" class="form-control input-md">
+
+          </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="btnAceptarBajaRemesa"></label>
+          <div class="col-md-4">
+            <input id="btnAceptarBajaRemesa" name="btnAceptarBajaRemesa" class="btn btn-primary"
+              onclick="aceptarBajaRemesa();" value="ENviar" />
+          </div>
+        </div>
+
+      </fieldset>
+    </form>
+  </div>
+
+
+
+
+  <script type="text/javascript" src="objetos.js"></script>
+  <script type="text/javascript">
+    "use strict";
+
+    // Programa principal
+    var oAlmacen = new Almacen();
+
+    ocultarFormularios();
+
+    function ocultarFormularios() {
+      frmAltaRemesa.style.display = "none";
+      frmBajaRemesa.style.display = "none";
+    }
+
+    function mostrarAltaRemesa() {
+      ocultarFormularios();
+      frmAltaRemesa.style.display = "block";
+    }
+
+    function mostrarBajaRemesa() {
+      ocultarFormularios();
+      frmBajaRemesa.style.display = "block";
+    }
+
+    function aceptarAltaRemesa() {
+      let iCodigo = parseInt(frmAltaRemesa.txtCodigo.value.trim());
+      let sNombre = frmAltaRemesa.txtNombre.value.trim();
+      let dbPrecio = parseFloat(frmAltaRemesa.txtPrecio.value.trim());
+      let iUnidades = parseInt(frmAltaRemesa.txtUnidades.value.trim());
+
+      let oP = new Producto(iCodigo, sNombre, dbPrecio, iUnidades);
+
+      // Inserto en el almacen
+      oAlmacen.altaRemesa(oP);
+
+      alert("Alta de remesa realizada");
+
+      ocultarFormularios();
+    }
+
+    function aceptarBajaRemesa() {
+      let iCodigo = parseInt(frmBajaRemesa.txtCodigo.value.trim());
+      let iUnidades = parseInt(frmBajaRemesa.txtUnidades.value.trim());
+      let oProducto = oAlmacen._buscarProducto(iCodigo);
+      console.log(oProducto);
+      if (oProducto != null && iUnidades>0 && oProducto.unidades >= iUnidades) {
+        
+
+          if (oProducto.unidades == iUnidades) {
+            //se elimina el producto.
+            oAlmacen._eliminarProducto(oProducto);
+          } else {
+            //actualizamos las existencias
+            oProducto.unidades = oProducto.unidades - iUnidades;
+
+          }
+          alert("Operación completada");
+        
+
+      } else {
+        alert("No se ha podido dar de baja el producto");
+      }
+      ocultarFormularios();
+    }
+
+    function productosPorCodigo() {
+      let sListado = oAlmacen.productosPorCodigo();
+
+      let oVentana = open();
+
+      oVentana.document.body.innerHTML = sListado;
+    }
+
+    function productosPorValor() {
+      let sListado = oAlmacen.productosPorValor();
+
+      let oVentana = open();
+
+      oVentana.document.body.innerHTML = sListado;
+    }
+
+    function listadoProductos(){
+      let sListado = oAlmacen.listadoProductos();
+
+      let oVentana = open();
+
+      oVentana.document.body.innerHTML = sListado;
+    }
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+clase Producto
+	nombre
+	precio
+
+clase StockProducto
+	objeto producto
+	unidades
+
+clase Almacen
+	array StockProducto
+
+	metodos
+	altaRemesa(stockProducto)
+	bajaRemesa(stockProducto)
+	listadoProductosPorCodigo(): string
+	
